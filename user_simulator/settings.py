@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-rc26a*cewv+xcp+0+&!_$4=a7zh856ty^&^jbv2tkoqaq4wr33
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['api-user-simulator-9d15c08b85a6.herokuapp.com']
+ALLOWED_HOSTS = ['api-user-simulator-9d15c08b85a6.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -77,14 +78,7 @@ WSGI_APPLICATION = 'user_simulator.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Api_Person',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',  # o el host de tu servidor PostgreSQL
-        'PORT': '5432',       # el puerto por defecto de PostgreSQL es 5432
-    }
+    'default': dj_database_url.config(default=os.environ.get('POSTGRESQL_ADDON_URI'))
 }
 
 
